@@ -77,8 +77,7 @@ async def _get_cnr_data(cache_mode=True, dont_wait=True):
             for x in sub_json_obj['nodes']:
                 full_nodes[x['id']] = x
 
-            if page % 5 == 0:
-                print(f"FETCH ComfyRegistry Data: {page}/{sub_json_obj['totalPages']}")
+            # 不在过程中显示进度信息，只在完成时显示一次
 
             page += 1
             time.sleep(0.5)
@@ -250,4 +249,3 @@ def read_cnr_id(fullpath):
         pass
 
     return None
-

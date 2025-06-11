@@ -1737,7 +1737,7 @@ async def default_cache_update():
             with manager_util.cache_lock:
                 with open(cache_uri, "w", encoding='utf-8') as file:
                     json.dump(json_obj, file, indent=4, sort_keys=True)
-                    logging.info(f"[ComfyUI-Manager] default cache updated: {uri}")
+                    pass
         except Exception as e:
             logging.error(f"[ComfyUI-Manager] Failed to perform initial fetching '{filename}': {e}")
             traceback.print_exc()
@@ -1758,7 +1758,7 @@ async def default_cache_update():
             await core.unified_manager.reload('remote', dont_wait=False)
             await core.unified_manager.get_custom_nodes(channel_url, 'remote')
 
-    logging.info("[ComfyUI-Manager] All startup tasks have been completed.")
+    logging.info("[ComfyUI-Manager] Cache update completed.")
 
 
 threading.Thread(target=lambda: asyncio.run(default_cache_update())).start()
@@ -1773,5 +1773,3 @@ cm_global.register_extension('ComfyUI-Manager',
                                  'name': 'ComfyUI Manager',
                                  'nodes': {},
                                  'description': 'This extension provides the ability to manage custom nodes in ComfyUI.', })
-
-
